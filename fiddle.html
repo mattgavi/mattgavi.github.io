@@ -10,16 +10,22 @@
     -->
     <div style="display:none; position: relative;">
       <script type="text/javascript">
+        const params = {};
+        location.search.replace('?', '').split('&').map((p) => p.split('=')).forEach(
+          ([name, value]) => {params[name] = value}
+        );
+        const placement_id = params.placement_id || '1857062041195879_1858984517670298';
+       
         var data = {
-          placementid: '1857062041195879_1858984517670298',
-          format: '300x250',
+          placementid: placement_id,
+          format: params.format || '300x250',
           testmode: false,
           onAdLoaded: function(element) {
-            console.log('Audience Network [1857062041195879_1858984517670298] ad loaded');
+            console.log(`Audience Network [${placement_id}] ad loaded`);
             element.style.display = 'block';
           },
           onAdError: function(errorCode, errorMessage) {
-            console.log('Audience Network [1857062041195879_1858984517670298] error (' + errorCode + ') ' + errorMessage);
+            console.log(`Audience Network [${placement_id}] error (${errorCode}) ${errorMessage}`);
             // PASSBACK goes here
           }
         };
